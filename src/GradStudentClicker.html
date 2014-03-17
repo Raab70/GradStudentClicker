@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html>
+<title>Grad Student Clicker</title>
+<body>
+<div id="header">
+    <h2><div id="student">
+        Student Name: 
+        <span id="name">default</span>
+    </div></h2>
+    <div id="gradeHeader">
+    	Grade: <span id="grade">9</span>
+    	School: <span id="school">High School</span>
+    </div>
+</div>
+	
+
+<div id="basicResourcesContainer">
+    <table id="basicResources">
+        <tbody>
+            <tr>
+                <td>
+                    <button onmousedown="increment(food)">Food</button>
+                </td>
+                <td>Food:</td>
+                <td class="number">
+                    <span id="food">0</span>
+                </td>
+                <td class="icon">
+    				<img class="icon icon-sm" src="chicken-leg-64.png"></img>
+				</td>
+ 				<td class="number">
+    				(Max storage: 
+    			<span id="maxFood"></span>
+    				)
+				</td>
+			 	<td class="number net">
+    			<span id="netFood" style="color: rgb(0, 0, 0);"></span>
+    				/s
+				</td>
+            </tr>
+            <tr>
+            	<td>
+                    <button onmousedown="increment(coffee)">Coffee</button>
+                </td>
+                <td>Coffee:</td>
+                <td class="number">
+                    <span id="coffee">0</span>
+                </td>
+                <td class="icon">
+    				<img class="icon icon-sm" src="coffee-mug_64.png"></img>
+				</td>
+ 				<td class="number">
+    				(Max storage: 
+    			<span id="maxCoffee"></span>
+    				)
+				</td>
+			 	<td class="number net">
+    			<span id="netCoffee" style="color: rgb(0, 0, 0);"></span>
+    				/s
+				</td>
+			</tr>
+			<tr>
+            	<td>
+                    <button onmousedown="increment(sleep)">Sleep</button>
+                </td>
+                <td>Sleep:</td>
+                <td class="number">
+                    <span id="sleep">0</span>
+                    
+                </td>
+                <td class="icon">
+    				<img class="icon icon-sm" src="coma-64.png"></img>
+				</td>
+ 				<td class="number">
+    				(Max storage: 
+    			<span id="maxSleep"></span>
+    				)
+				</td>
+			 	<td class="number net">
+    			<span id="netSleep" style="color: rgb(0, 0, 0);"></span>
+    				/s
+				</td>
+			</tr>
+       </tbody>
+   </table>
+</div>
+
+
+<div id="selectors">
+	<div id="selectWork" class="paneSelector" onclick="paneSelect('work')'">Work</div>
+	<div id="selectUpgrades" class="paneSelector" onclick="paneSelect('upgrades')">Upgrades</div>
+</div>
+
+
+
+
+
+
+<script src="gradclicker.js" type="text/javascript"> </script>
+</body>
+</html>
