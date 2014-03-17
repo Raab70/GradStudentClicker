@@ -62,11 +62,11 @@
 			</tr>
 			<tr>
             	<td>
-                    <button onmousedown="increment(sleep)">Sleep</button>
+                    <button onmousedown="increment(sex)">Sex</button>
                 </td>
-                <td>Sleep:</td>
+                <td>Sex:</td>
                 <td class="number">
-                    <span id="sleep">0</span>
+                    <span id="sex">0</span>
                     
                 </td>
                 <td class="icon">
@@ -74,11 +74,11 @@
 				</td>
  				<td class="number">
     				(Max storage: 
-    			<span id="maxSleep"></span>
+    			<span id="maxSex"></span>
     				)
 				</td>
 			 	<td class="number net">
-    			<span id="netSleep" style="color: rgb(0, 0, 0);"></span>
+    			<span id="netSex" style="color: rgb(0, 0, 0);"></span>
     				/s
 				</td>
 			</tr>
@@ -86,14 +86,59 @@
    </table>
 </div>
 
-<div id="upgrades">
-	<h2>Upgrades:</h2>
-	 <table id="upgradesTable">
+<div id="study">
+	<h2>Study: <span id="studyPoints"></span> Points</h2>
+	 <table id="studyTable">
 	 	<tbody>
-	 		<tr>
+	 		<tr id="hwRow">
 	 			<td>
-	 				<button value="FirstUpgrade!">First Upgrade!</button>
+	 				<button onmousedown="study(homework,1)" value="Homework">Homework</button>
 	 			</td>
+	 			<td class="number">
+	 				<span id="homework"></span>
+	 			</td>
+	 			<td style="color:gray">Requires: <i>10 food, 10 coffee</i></td>
+	 			<td style="color:gray">Yields: <i>+1 Study Points</i></td>
+	 		</tr>
+	 		<tr id="quizRow">
+	 			<td>
+	 				<button onmousedown="study(quiz,1)">Quiz</button>
+	 			</td>
+	 			<td class="number">
+	 				<span id="quiz"></span>
+	 			</td>
+	 			<td style="color:gray">Requires: <i>50 food, 50 coffee,1 sex</i></td>
+	 			<td style="color:gray">Yields: <i>+5 Study points</i></td>
+	 		</tr>
+	 		<tr id="testRow">
+	 			<td>
+	 				<button onmousedown="study(test,1)">Test</button>
+	 			</td>
+	 			<td class="number">
+	 				<span id="test"></span>
+	 			</td>
+	 			<td style="color:gray">Requires: <i>100 food, 100 coffee,10 sex</i></td>
+	 			<td style="color:gray">Yields: <i>+10 Study Points</i></td>
+	 		</tr>
+	 		<tr id="projRow">
+	 			<td>
+	 				<button onmousedown="study(project,1)">Project</button>
+	 			</td>
+	 			<td class="number">
+	 				<span id="project"></span>
+	 			</td>
+	 			<td style="color:gray">Requires: <i>500 food, 500 coffee,10 sex</i></td>
+	 			<td style="color:gray">Yields: <i>+35 Study Points</i></td>
+	 		</tr>
+	 		<tr id="presRow">
+	 			<td>
+	 				<button onmousedown="study(presentation,1)">Presentation</button>
+	 			</td>
+	 			<td class="number">
+	 				<span id="presentation"></span>
+	 			</td>
+	 			<td style="color:gray">Requires: <i>1000 food, 1000 coffee,100 sex</i></td>
+	 			<td style="color:gray">Yields: <i>+50 Study Points</i></td>
 	 		</tr>
 	 	</tbody>
 	 </table>
