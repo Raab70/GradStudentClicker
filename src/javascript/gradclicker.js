@@ -2,37 +2,108 @@
 
 var player={
 		name:"Generic Student",
-		grade:9
+		grade:9,
+		study:0
 },
 food={
 		name:'food',
-		total:0,
+		total:10000,
 		increment:1,
 		max:200,
 		net:0.0
 },
-sleep={
-		name:'sleep',
-		total:0,
+sex={
+		name:'sex',
+		total:10000,
 		increment:1,
 		max:200,
 		net:0.0
 },
 coffee={
 		name:'coffee',
-		total:0,
+		total:10000,
 		increment:1,
 		max:200,
 		net:0.0
+},
+homework={
+	total:0,
+	study:1,
+	require: {
+		coffee:10,
+		food:  10,
+		sex:    0
+	}
+},
+quiz={
+	total:0,
+	study:5,
+	require: {
+		coffee:50,
+		food:  50,
+		sex:    1
+	}
+},
+test={
+	total:0,
+	study:10,
+	require: {
+		coffee:100,
+		food:  100,
+		sex:    10
+	}
+},
+project={
+	total:0,
+	study:35,
+	require: {
+		coffee:500,
+		food:  500,
+		sex:    10
+	}
+},
+presentation={
+	total:0,
+	study:50,
+	require: {
+		coffee:1000,
+		food:  1000,
+		sex:    100
+	}
 };
 //Initialize
 player.name=prompt("What is your name?");
 document.getElementById('name').innerHTML=player.name;
 updateGrade();
 updateResources();
+updateStudy();
 
+function study(assignment,number){
+	if (sex.total>=assignment.require.sex && food.total>=assignment.require.food && coffee.total>=assignment.require.coffee){
+		assignment.total=assignment.total+number;
+		sex.total    = sex.total   -number*assignment.require.sex;
+		food.total   = food.total  -number*assignment.require.food;
+		coffee.total = coffee.total-number*assignment.require.coffee;
+		
+		//update study points
+		player.study=player.study+number*assignment.study;
+		
+		updateResources();
+		updateStudy();
+	} else{
+		console.log("Not enough resources to study that...")
+	}
+	
+}
 
-
+function updateStudy(){
+	document.getElementById('homework').innerHTML=homework.total;
+	document.getElementById('quiz').innerHTML=quiz.total;
+	document.getElementById('test').innerHTML=test.total;
+	document.getElementById('project').innerHTML=project.total;
+	document.getElementById('presentation').innerHTML=presentation.total;
+	document.getElementById('studyPoints').innerHTML=player.study;
+}
 
 function increment(resource){
 	resource.total=resource.total+resource.increment;
@@ -67,16 +138,16 @@ function updateResources(){
 	} else { //net coffee is negative
 		document.getElementById('netCoffee').style.color = '#f00';
 	}
-	//update sleep
-	document.getElementById('sleep').innerHTML=Math.round(sleep.total);
-	document.getElementById('maxSleep').innerHTML=sleep.max;
-	document.getElementById('netSleep').innerHTML=prettify(sleep.net.toFixed(1));
-	if (sleep.net > 0) {
-		document.getElementById('netSleep').style.color = '#0b0';
-	} else if (sleep.net == 0){
-		document.getElementById('netSleep').style.color = '#000';
-	} else { //net sleep is negative
-		document.getElementById('netSleep').style.color = '#f00';
+	//update sex
+	document.getElementById('sex').innerHTML=Math.round(sex.total);
+	document.getElementById('maxSex').innerHTML=sex.max;
+	document.getElementById('netSex').innerHTML=prettify(sex.net.toFixed(1));
+	if (sex.net > 0) {
+		document.getElementById('netSex').style.color = '#0b0';
+	} else if (sex.net == 0){
+		document.getElementById('netSex').style.color = '#000';
+	} else { //net sex is negative
+		document.getElementById('netSex').style.color = '#f00';
 	}
 
 }
@@ -103,9 +174,9 @@ window.setInterval(function(){
 	if (coffee.total>coffee.max){
 		coffee.total=coffee.max
 	}
-	sleep.total=sleep.total+sleep.net;
-	if (sleep.total>sleep.max){
-		sleep.total=sleep.max
+	sex.total=sex.total+sex.net;
+	if (sex.total>sex.max){
+		sex.total=sex.max
 	}
 	updateResources();
 },1000);
