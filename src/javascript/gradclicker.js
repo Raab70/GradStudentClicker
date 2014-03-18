@@ -13,9 +13,9 @@ food={
 		max:2000,
 		net:0.0
 },
-sex={
-		name:'sex',
-		total:0200000,
+time={
+		name:'time',
+		total:0,
 		increment:1,
 		max:2000,
 		net:0.0
@@ -33,7 +33,7 @@ homework={
 	require: {
 		coffee:10,
 		food:  10,
-		sex:    0
+		time:    0
 	}
 },
 quiz={
@@ -42,7 +42,7 @@ quiz={
 	require: {
 		coffee:50,
 		food:  50,
-		sex:    1
+		time:    1
 	}
 },
 test={
@@ -51,7 +51,7 @@ test={
 	require: {
 		coffee:100,
 		food:  100,
-		sex:    10
+		time:    10
 	}
 },
 project={
@@ -60,7 +60,7 @@ project={
 	require: {
 		coffee:500,
 		food:  500,
-		sex:    10
+		time:    10
 	}
 },
 presentation={
@@ -69,7 +69,20 @@ presentation={
 	require: {
 		coffee:1000,
 		food:  1000,
-		sex:    100
+		time:    100
+	}
+},
+whiteboard={
+	chance: 0.1,
+	reward: {
+		coffee:1,
+		food:  1,
+		time:  100
+	},
+	require: {
+		coffee:10,
+		food:  10,
+		time:   0
 	}
 };
 //Initialize
@@ -85,9 +98,9 @@ document.getElementById('name').innerHTML=player.name;
 
 
 function study(assignment,number){
-	if (sex.total>=assignment.require.sex && food.total>=assignment.require.food && coffee.total>=assignment.require.coffee){
+	if (time.total>=assignment.require.time && food.total>=assignment.require.food && coffee.total>=assignment.require.coffee){
 		assignment.total=assignment.total+number;
-		sex.total    = sex.total   -number*assignment.require.sex;
+		time.total    = time.total   -number*assignment.require.time;
 		food.total   = food.total  -number*assignment.require.food;
 		coffee.total = coffee.total-number*assignment.require.coffee;
 		
@@ -144,16 +157,16 @@ function updateResources(){
 	} else { //net coffee is negative
 		document.getElementById('netCoffee').style.color = '#f00';
 	}
-	//update sex
-	document.getElementById('sex').innerHTML   =prettify(Math.round(sex.total));
-	document.getElementById('maxSex').innerHTML=prettify(sex.max);
-	document.getElementById('netSex').innerHTML=prettify(sex.net.toFixed(1));
-	if (sex.net > 0) {
-		document.getElementById('netSex').style.color = '#0b0';
-	} else if (sex.net == 0){
-		document.getElementById('netSex').style.color = '#000';
-	} else { //net sex is negative
-		document.getElementById('netSex').style.color = '#f00';
+	//update time
+	document.getElementById('time').innerHTML   =prettify(Math.round(time.total));
+	document.getElementById('maxTime').innerHTML=prettify(time.max);
+	document.getElementById('netTime').innerHTML=prettify(time.net.toFixed(1));
+	if (time.net > 0) {
+		document.getElementById('netTime').style.color = '#0b0';
+	} else if (time.net == 0){
+		document.getElementById('netTime').style.color = '#000';
+	} else { //net time is negative
+		document.getElementById('netTime').style.color = '#f00';
 	}
 
 }
@@ -187,6 +200,30 @@ function updateGrade(){
 	updateStudy();
 }
 
+function gamble(trick){
+	
+	if (time.total>=trick.require.time && coffee.total>=trick.require.coffee && food.total>=trick.require.food){
+		time.total  =time.total  -trick.require.time;
+		coffee.total=coffee.total-trick.require.coffee;
+		food.total  =food.total  -trick.require.food;
+		x=Math.random();
+		if (x >= (1-trick.chance)){
+			//you win!
+			x=x+1;
+			food.total  =food.total  +x*trick.reward.food;
+			console.log("you won",x*trick.reward.food,"food!");
+			coffee.total=coffee.total+x*trick.reward.coffee;
+			console.log("you won",x*trick.reward.coffee,"coffee!");
+			time.total  =time.total  +x*trick.reward.time;
+			console.log("you won",x*trick.reward.time,"time!");
+		} else{
+			console.log("You lose!");
+		}
+	}
+	
+	updateResources();
+}
+
 window.setInterval(function(){
 	food.total=food.total+food.net;
 	if (food.total>food.max){
@@ -196,9 +233,9 @@ window.setInterval(function(){
 	if (coffee.total>coffee.max){
 		coffee.total=coffee.max
 	}
-	sex.total=sex.total+sex.net;
-	if (sex.total>sex.max){
-		sex.total=sex.max
+	time.total=time.total+time.net;
+	if (time.total>time.max){
+		time.total=time.max
 	}
 	updateResources();
 },1000);
@@ -232,17 +269,24 @@ function prettify(input){
 function paneSelect(name){
 	//Called when user switches between the various panes on the left hand side of the interface
 	if (name == 'study'){
-		document.getElementById("studyPane").style.display = "block";
+		document.getElementById("studyPane").style.display    = "block";
 		document.getElementById("upgradesPane").style.display = "none";
+		document.getElementById("gamblingPane").style.display = "none";
 		//document.getElementById("selectStudy").className = "paneSelector selected";
 		//document.getElementById("selectUpgrades").className = "paneSelector";
 
 	}
 	if (name == 'upgrades'){
-		document.getElementById("studyPane").style.display = "none";
+		document.getElementById("studyPane").style.display    = "none";
 		document.getElementById("upgradesPane").style.display = "block";
+		document.getElementById("gamblingPane").style.display = "none";
 		//document.getElementById("selectStudy").className = "paneSelector";
 		//document.getElementById("selectUpgrades").className = "paneSelector selected";
+	}
+	if (name == 'gambling') {
+		document.getElementById("studyPane").style.display    = "none";
+		document.getElementById("upgradesPane").style.display = "none";
+		document.getElementById("gamblingPane").style.display = "block";
 	}
 }
 
