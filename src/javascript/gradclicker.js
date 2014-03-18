@@ -109,7 +109,7 @@ function updateStudy(){
 
 function increment(resource){
 	resource.total=resource.total+resource.increment;
-	//make sure we're not over the max'
+	//make sure we're not over the max, is already done in update resources too
 	if (resource.total > resource.max){
 		resource.total=resource.max;
 	}
@@ -159,16 +159,12 @@ function updateGrade(){
 	
 	if (player.study>=player.nextGrade) {
 		player.grade=player.grade+1;
+		//definitely need a better way to figure this out:
+		//will come w/testing
+		player.nextGrade=player.nextGrade*10;
 	}
-	if (player.grade==10){
-		player.nextGrade=200;
-	} else if (player.grade==11){
-		player.nextGrade=2000;
-	} else if (player.grade==12){
-		player.nextGrade=20000;
-	} else if (player.grade==13){
-		player.nextGrade=200000;
-	}
+	
+	
 	
 	document.getElementById('grade').innerHTML=player.grade;
 	document.getElementById('nextGrade').innerHTML=player.nextGrade;
@@ -205,8 +201,8 @@ function prettify(input){
 	var characteristic = '', //the bit that comes before the decimal point
 	mantissa = '', //the bit that comes afterwards
 	digitCount = 0;
-	delimiter = "&#8239;"; //thin space is the ISO standard thousands delimiter. we need a non-breaking version
-	
+	//delimiter = "&#8239;"; //thin space is the ISO standard thousands delimiter. we need a non-breaking version
+	delimiter = ","
 	//first split the string on the decimal point, and assign to the characteristic and mantissa
 	var parts = output.split('.');
 	if (typeof parts[1] === 'string') var mantissa = '.' + parts[1]; //check it's defined first, and tack a decimal point to the start of it
