@@ -87,7 +87,13 @@
 </div>
 
 <div id="study">
-	
+	<div id="panesSelectors">
+
+    <div id="selectors">
+            <button onclick="paneSelect('study')"   >Study   </button>
+			<button onclick="paneSelect('upgrades')">Upgrades</button>
+	</div>
+	<div id="studyPane">
 	 <table id="studyTable">
 	 	<tbody>
 	 		<tr id="headerRow">
@@ -145,9 +151,22 @@
 	 			<td style="color:gray">Requires: <i>1000 food, 1000 coffee,100 sex</i></td>
 	 			<td style="color:gray">Yields: <i>+50 Study Points</i></td>
 	 		</tr>
+			<tr id="spaceRow"></tr>
+			<tr id="advanceRow">
+				<td>
+	 				<button onmousedown="updateGrade()">Advance Grade</button>
+	 			</td>
+	 			<td></td>
+	 			<td style="color:gray">Requires: <i><span id="nextGrade2">20</span> Study points</i></td>
+	 			<td style="color:gray">Yields: <i>not a damn thing</i></td>
+			</tr>
 	 	</tbody>
 	 </table>
-</div>
+	</div>
+	<div id="upgradesPane">
+		This is the upgrades pane!
+	</div>
+ </div>
 
 
 

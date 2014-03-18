@@ -73,11 +73,16 @@ presentation={
 	}
 };
 //Initialize
-player.name=prompt("What is your name?");
-document.getElementById('name').innerHTML=player.name;
-updateGrade();
 updateResources();
 updateStudy();
+paneSelect('study');
+updateGrade();
+//Get their name
+player.name=prompt("What is your name?");
+document.getElementById('name').innerHTML=player.name;
+
+
+
 
 function study(assignment,number){
 	if (sex.total>=assignment.require.sex && food.total>=assignment.require.food && coffee.total>=assignment.require.coffee){
@@ -91,7 +96,6 @@ function study(assignment,number){
 		
 		updateResources();
 		updateStudy();
-		updateGrade();
 	} else{
 		console.log("Not enough resources to study that...")
 	}
@@ -158,17 +162,20 @@ function updateGrade(){
 	var school='';
 	
 	if (player.study>=player.nextGrade) {
+		player.study=player.study-player.nextGrade;
 		player.grade=player.grade+1;
 		//definitely need a better way to figure this out:
 		//will come w/testing
 		player.nextGrade=player.nextGrade*10;
+		
 	}
 	
 	
 	
 	document.getElementById('grade').innerHTML=player.grade;
 	document.getElementById('nextGrade').innerHTML=player.nextGrade;
-	
+	document.getElementById('nextGrade2').innerHTML=player.nextGrade;
+
 	if (player.grade<12){
 		school='High School';
 	} else if (player.grade<16){
@@ -177,6 +184,7 @@ function updateGrade(){
 		school="Graduate School";
 	}
 	document.getElementById('school').innerHTML=school;
+	updateStudy();
 }
 
 window.setInterval(function(){
@@ -221,4 +229,20 @@ function prettify(input){
 	return output;
 }
 
+function paneSelect(name){
+	//Called when user switches between the various panes on the left hand side of the interface
+	if (name == 'study'){
+		document.getElementById("studyPane").style.display = "block";
+		document.getElementById("upgradesPane").style.display = "none";
+		//document.getElementById("selectStudy").className = "paneSelector selected";
+		//document.getElementById("selectUpgrades").className = "paneSelector";
+
+	}
+	if (name == 'upgrades'){
+		document.getElementById("studyPane").style.display = "none";
+		document.getElementById("upgradesPane").style.display = "block";
+		//document.getElementById("selectStudy").className = "paneSelector";
+		//document.getElementById("selectUpgrades").className = "paneSelector selected";
+	}
+}
 
