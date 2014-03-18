@@ -62,11 +62,11 @@
 			</tr>
 			<tr>
             	<td>
-                    <button onmousedown="increment(sex)">Sex</button>
+                    <button onmousedown="increment(time)">Time</button>
                 </td>
-                <td>Sex:</td>
+                <td>Time:</td>
                 <td class="number">
-                    <span id="sex">0</span>
+                    <span id="time">0</span>
                     
                 </td>
                 <td class="icon">
@@ -74,11 +74,11 @@
 				</td>
  				<td class="number">
     				(Max storage: 
-    			<span id="maxSex"></span>
+    			<span id="maxTime"></span>
     				)
 				</td>
 			 	<td class="number net">
-    			<span id="netSex" style="color: rgb(0, 0, 0);"></span>
+    			<span id="netTime" style="color: rgb(0, 0, 0);"></span>
     				/s
 				</td>
 			</tr>
@@ -92,6 +92,7 @@
     <div id="selectors">
             <button onclick="paneSelect('study')"   >Study   </button>
 			<button onclick="paneSelect('upgrades')">Upgrades</button>
+			<button onclick="paneSelect('gambling')">Gambling</button>
 	</div>
 	<div id="studyPane">
 	 <table id="studyTable">
@@ -118,7 +119,7 @@
 	 			<td class="number">
 	 				<span id="quiz"></span>
 	 			</td>
-	 			<td style="color:gray">Requires: <i>50 food, 50 coffee,1 sex</i></td>
+	 			<td style="color:gray">Requires: <i>50 food, 50 coffee,1 time</i></td>
 	 			<td style="color:gray">Yields: <i>+5 Study points</i></td>
 	 		</tr>
 	 		<tr id="testRow">
@@ -128,7 +129,7 @@
 	 			<td class="number">
 	 				<span id="test"></span>
 	 			</td>
-	 			<td style="color:gray">Requires: <i>100 food, 100 coffee,10 sex</i></td>
+	 			<td style="color:gray">Requires: <i>100 food, 100 coffee,10 time</i></td>
 	 			<td style="color:gray">Yields: <i>+10 Study Points</i></td>
 	 		</tr>
 	 		<tr id="projRow">
@@ -138,7 +139,7 @@
 	 			<td class="number">
 	 				<span id="project"></span>
 	 			</td>
-	 			<td style="color:gray">Requires: <i>500 food, 500 coffee,10 sex</i></td>
+	 			<td style="color:gray">Requires: <i>500 food, 500 coffee,10 time</i></td>
 	 			<td style="color:gray">Yields: <i>+35 Study Points</i></td>
 	 		</tr>
 	 		<tr id="presRow">
@@ -148,7 +149,7 @@
 	 			<td class="number">
 	 				<span id="presentation"></span>
 	 			</td>
-	 			<td style="color:gray">Requires: <i>1000 food, 1000 coffee,100 sex</i></td>
+	 			<td style="color:gray">Requires: <i>1000 food, 1000 coffee,100 time</i></td>
 	 			<td style="color:gray">Yields: <i>+50 Study Points</i></td>
 	 		</tr>
 			<tr id="spaceRow"></tr>
@@ -166,12 +167,28 @@
 	<div id="upgradesPane">
 		This is the upgrades pane!
 	</div>
+	<div id="gamblingPane">
+		<table id="studyTable">
+	 	<tbody>
+	 		<tr id="headerRow">
+	 			<td><h2>Gambling:  </h2></td>
+	 		</tr>
+	 		<tr id="whiteboardRow">
+	 			<td>
+	 				<button onmousedown="gamble(whiteboard)">Stare at Whiteboard</button>
+	 			</td>
+	 			<td class="number">
+	 				<span id="homework"></span>
+	 			</td>
+	 			<td style="color:gray">Requires: <i>10 food, 10 coffee</i></td>
+	 			<td style="color:gray">Yields: <i>????</i></td>
+	 		</tr>
+	 	</tbody>
+	 	</table>
+	</div>
  </div>
-
-
-
-
-
+ 
+ 
 
 <script src="javascript/gradclicker.js" type="text/javascript"> </script>
 </body>
