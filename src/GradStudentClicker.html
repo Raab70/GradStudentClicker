@@ -87,9 +87,13 @@
 </div>
 
 <div id="study">
-	<h2>Study: <span id="studyPoints"></span> Points</h2>
+	
 	 <table id="studyTable">
 	 	<tbody>
+	 		<tr id="headerRow">
+	 			<td><h2>Study: <span id="studyPoints"></span> Points </h2></td>
+	 			<td style="color:gray"><i>Next level: <span id="nextGrade">20</i></span></td>
+	 		</tr>
 	 		<tr id="hwRow">
 	 			<td>
 	 				<button onmousedown="study(homework,1)" value="Homework">Homework</button>

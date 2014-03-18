@@ -3,27 +3,28 @@
 var player={
 		name:"Generic Student",
 		grade:9,
-		study:0
+		study:0,
+		nextGrade:20
 },
 food={
 		name:'food',
-		total:10000,
+		total:220000,
 		increment:1,
-		max:200,
+		max:2000,
 		net:0.0
 },
 sex={
 		name:'sex',
-		total:10000,
+		total:0200000,
 		increment:1,
-		max:200,
+		max:2000,
 		net:0.0
 },
 coffee={
 		name:'coffee',
-		total:10000,
+		total:20000,
 		increment:1,
-		max:200,
+		max:2000,
 		net:0.0
 },
 homework={
@@ -90,6 +91,7 @@ function study(assignment,number){
 		
 		updateResources();
 		updateStudy();
+		updateGrade();
 	} else{
 		console.log("Not enough resources to study that...")
 	}
@@ -97,12 +99,12 @@ function study(assignment,number){
 }
 
 function updateStudy(){
-	document.getElementById('homework').innerHTML=homework.total;
-	document.getElementById('quiz').innerHTML=quiz.total;
-	document.getElementById('test').innerHTML=test.total;
-	document.getElementById('project').innerHTML=project.total;
-	document.getElementById('presentation').innerHTML=presentation.total;
-	document.getElementById('studyPoints').innerHTML=player.study;
+	document.getElementById('homework').innerHTML    =prettify(homework.total);
+	document.getElementById('quiz').innerHTML        =prettify(quiz.total);
+	document.getElementById('test').innerHTML        =prettify(test.total);
+	document.getElementById('project').innerHTML     =prettify(project.total);
+	document.getElementById('presentation').innerHTML=prettify(presentation.total);
+	document.getElementById('studyPoints').innerHTML =prettify(player.study);
 }
 
 function increment(resource){
@@ -117,8 +119,8 @@ function increment(resource){
 
 function updateResources(){
 	//update food
-	document.getElementById('food').innerHTML=Math.round(food.total);
-	document.getElementById('maxFood').innerHTML=food.max;
+	document.getElementById('food').innerHTML   =prettify(Math.round(food.total));
+	document.getElementById('maxFood').innerHTML=prettify(food.max);
 	document.getElementById('netFood').innerHTML=prettify(food.net.toFixed(1));
 	if (food.net > 0) {
 		document.getElementById('netFood').style.color = '#0b0';
@@ -128,8 +130,8 @@ function updateResources(){
 		document.getElementById('netFood').style.color = '#f00';
 	}
 	//update coffee
-	document.getElementById('coffee').innerHTML=Math.round(coffee.total);
-	document.getElementById('maxCoffee').innerHTML=coffee.max;
+	document.getElementById('coffee').innerHTML   =prettify(Math.round(coffee.total));
+	document.getElementById('maxCoffee').innerHTML=prettify(coffee.max);
 	document.getElementById('netCoffee').innerHTML=prettify(coffee.net.toFixed(1));
 	if (coffee.net > 0) {
 		document.getElementById('netCoffee').style.color = '#0b0';
@@ -139,8 +141,8 @@ function updateResources(){
 		document.getElementById('netCoffee').style.color = '#f00';
 	}
 	//update sex
-	document.getElementById('sex').innerHTML=Math.round(sex.total);
-	document.getElementById('maxSex').innerHTML=sex.max;
+	document.getElementById('sex').innerHTML   =prettify(Math.round(sex.total));
+	document.getElementById('maxSex').innerHTML=prettify(sex.max);
 	document.getElementById('netSex').innerHTML=prettify(sex.net.toFixed(1));
 	if (sex.net > 0) {
 		document.getElementById('netSex').style.color = '#0b0';
@@ -154,7 +156,23 @@ function updateResources(){
 
 function updateGrade(){
 	var school='';
+	
+	if (player.study>=player.nextGrade) {
+		player.grade=player.grade+1;
+	}
+	if (player.grade==10){
+		player.nextGrade=200;
+	} else if (player.grade==11){
+		player.nextGrade=2000;
+	} else if (player.grade==12){
+		player.nextGrade=20000;
+	} else if (player.grade==13){
+		player.nextGrade=200000;
+	}
+	
 	document.getElementById('grade').innerHTML=player.grade;
+	document.getElementById('nextGrade').innerHTML=player.nextGrade;
+	
 	if (player.grade<12){
 		school='High School';
 	} else if (player.grade<16){
